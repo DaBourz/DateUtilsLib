@@ -2,25 +2,24 @@
 
 class DateUtils {
 
-
+	/* French Dates */
 	function datefr($timestamp,$modejour,$modemois,$modeheure){
-		/****************************************************************************
-		 *   Date Fr - Powered by Internet Galaxie  - http://iGalaxie.com           *
-		 ****************************************************************************/
-		
-		/* Utilisation :
-		    Fonction possède 4 paramètres :
-		        - timestamp : date/heure (au format UNIX)
-		        - modejour : l:long (lundi 23) ; c:court (lun 23) ; n:chiffre du jour (23) ; h:pas de jour
-		          -> l ou c en majucule met la premier lettre du mot en maj (ex C : Lun)
-		        - modemois : l:long (septembre) ; c:court (sept) ; n:chiffre (09) ; h:pas de mois
-		          -> idem pour les maj
-		        - heure       : l:long (7 heures 35) ; c:court (7h35) ; n:pas d'heure
-		    Exemples :  echo datefr(325689845,C,L,n); retourne        Dim 27 Avril 1980
-		                 echo datefr(325689845,n,c,n);                  27 avr 1980
-		                 echo datefr(325689845,l,n,l);                dimanche 27/04/1980 7 heures 35
-		                 echo datefr(325689845,h,h,l);                7 heures 35
-		*/
+
+	/* Usage :
+	    Function has 4 params :
+	        - timestamp : date/time (UNIX format)
+	        - modejour : l:long (lundi 23) ; c:short (lun 23) ; n:day number (23) ; h:nothing
+	          -> L or C in Caps puts the first letter of the day in Caps (ex C : Lun)
+	        - modemois : l:long (septembre) ; c:short (sept) ; n:number (09) ; h:nothing
+	          -> L or C in Caps puts the first letter of the day in Caps (ex C : Lun)
+	        - modeheure : l:long (7 heures 35) ; c:short (7h35) ; n:nothing
+	
+	    Exemples :  
+		echo datefr(325689845,C,L,n); retourne        Dim 27 Avril 1980
+	    echo datefr(325689845,n,c,n);                  27 avr 1980
+	    echo datefr(325689845,l,n,l);                dimanche 27/04/1980 7 heures 35
+	    echo datefr(325689845,h,h,l);                7 heures 35
+	*/
 
 
     	if (!isset($timestamp)||!isset($modejour)||!isset($modemois)||!isset($modeheure))

@@ -1,8 +1,25 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+/**
+ * DateUtils Class
+ *
+ * @category	Libraries
+ * @author		Stéphane Bourzeix
+ * @link		https://github.com/DaBourz/DateUtilsLib
+ */
+ 
 class DateUtils {
 
-	/* French Dates */
+	/**
+	 * Format and return the date in french
+	 *
+	 * @access	public
+	 * @param	timestamp	unix timestamp
+	 * @param	string		day display formatting
+	 * @param	string		month display formatting
+	 * @param	string		hour display formatting
+	 * @return	string	
+	 */
 	function datefr($timestamp,$modejour,$modemois,$modeheure){
 
 	/* Usage :
@@ -14,18 +31,17 @@ class DateUtils {
 	          -> L or C in Caps puts the first letter of the day in Caps (ex C : Lun)
 	        - modeheure : l:long (7 heures 35) ; c:short (7h35) ; n:nothing
 	
-	    Exemples :  
-		echo datefr(325689845,C,L,n); retourne        Dim 27 Avril 1980
-	    echo datefr(325689845,n,c,n);                  27 avr 1980
-	    echo datefr(325689845,l,n,l);                dimanche 27/04/1980 7 heures 35
-	    echo datefr(325689845,h,h,l);                7 heures 35
+	    Examples :  
+		echo datefr(325689845,C,L,n);	=	Dim 27 Avril 1980
+	    echo datefr(325689845,n,c,n);	=	27 avr 1980
+	    echo datefr(325689845,l,n,l);	=	dimanche 27/04/1980 7 heures 35
+	    echo datefr(325689845,h,h,l);	=	7 heures 35
 	*/
 
 
     	if (!isset($timestamp)||!isset($modejour)||!isset($modemois)||!isset($modeheure))
     	{
-    	    echo  "Fonction datefr() : Erreur, param&egrave;tres incorrects.";
-    	    exit();
+    	    return false;
     	}
 		
     	 /* On formate notre date */
@@ -149,4 +165,5 @@ class DateUtils {
 
 }
 
-?>
+/* End of file DateUtils.php */
+/* Location: ./application/libraries/DateUtils.php */

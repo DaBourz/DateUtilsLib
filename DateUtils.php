@@ -10,6 +10,13 @@
  
 class DateUtils {
 
+	private $defaulttime;
+
+	public function __construct()
+    {
+        $this->defaulttime = time();
+    }
+
 	/**
 	 * Format and return the date in french
 	 *
@@ -19,30 +26,28 @@ class DateUtils {
 	 * @param	string		month display formatting
 	 * @param	string		hour display formatting
 	 * @return	string	
+	 *
+	 * Usage:
+	 * Function has 4 params:
+	 * - timestamp: date/time (UNIX format)
+	 * - modejour: l:long (lundi 23) ; c:short (lun 23) ; n:day number (23) ; h:nothing
+	 *   L or C in Caps puts the first letter of the day in Caps (ex C : Lun)
+	 * - modemois: l:long (septembre) ; c:short (sept) ; n:number (09) ; h:nothing
+	 *   L or C in Caps puts the first letter of the day in Caps (ex C : Lun)
+	 * - modeheure: l:long (7 heures 35) ; c:short (7h35) ; n:nothing
+	 *
+	 * Examples :
+	 * $this->load->library('dateutils');
+	 *
+	 * echo $this->dateutils->datefr()					=	27/04/1980
+	 * echo $this->dateutils->datefr(325689845,C,L,n);	=	Dim 27 Avril 1980
+	 * echo $this->dateutils->datefr(325689845,n,c,n);	=	27 avr 1980
+	 * echo $this->dateutils->datefr(325689845,l,n,l);	=	dimanche 27/04/1980 7 heures 35
+	 * echo $this->dateutils->datefr(325689845,h,h,l);	=	7 heures 35
 	 */
-	function datefr($timestamp,$modejour,$modemois,$modeheure){
-
-	/* Usage :
-	    Function has 4 params :
-	        - timestamp : date/time (UNIX format)
-	        - modejour : l:long (lundi 23) ; c:short (lun 23) ; n:day number (23) ; h:nothing
-	          -> L or C in Caps puts the first letter of the day in Caps (ex C : Lun)
-	        - modemois : l:long (septembre) ; c:short (sept) ; n:number (09) ; h:nothing
-	          -> L or C in Caps puts the first letter of the day in Caps (ex C : Lun)
-	        - modeheure : l:long (7 heures 35) ; c:short (7h35) ; n:nothing
-	
-	    Examples :  
-		echo datefr(325689845,C,L,n);	=	Dim 27 Avril 1980
-	    echo datefr(325689845,n,c,n);	=	27 avr 1980
-	    echo datefr(325689845,l,n,l);	=	dimanche 27/04/1980 7 heures 35
-	    echo datefr(325689845,h,h,l);	=	7 heures 35
-	*/
-
-
-    	if (!isset($timestamp)||!isset($modejour)||!isset($modemois)||!isset($modeheure))
-    	{
-    	    return false;
-    	}
+	function datefr($timestamp = null, $modejour = 'n', $modemois = 'n', $modeheure = 'n')
+	{
+		if ($timestamp==null){$timestamp = $this->defaulttime;}
 		
     	 /* On formate notre date */
     	$jour=date( "d",$timestamp);      // jour
@@ -59,11 +64,12 @@ class DateUtils {
     	    $aff_heure= ' heure ';
 		
     	 /* On definit numero du mois */
-    	$zero  =  substr($mois,0,1);
-    	if  ($zero  ==   "0")  {
-    	        $num_mois  =  substr($mois,1,1);  // On supprime le premier zero
-    	    }
-    	    else { $num_mois = $mois ; }
+		$zero  =  substr($mois,0,1);
+		if  ($zero  ==   "0")  {
+			$num_mois  =  substr($mois,1,1);  // On supprime le premier zero
+		} else { 
+    	    $num_mois = $mois ; 
+		}
 		
     	 /* Nom long des jours */
     	$noml_jour[0]  =   "dimanche";
